@@ -6,6 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const SpriteLoaderPlugin = require('svg-sprite-loader/plugin');
 
 /**
  * The internal dependencies.
@@ -100,6 +101,7 @@ const plugins = [
       }),
     ],
   }),
+  new SpriteLoaderPlugin(),
 ];
 
 /**
@@ -166,7 +168,11 @@ module.exports = {
         }),
       },
       {
-        test: /images[\\/].*\.(ico|jpg|jpeg|png|svg|gif)$/,
+        test: /images[\\/]svg-sprite[\\/].*\.svg$/,
+        use: { loader: 'svg-sprite-loader', options: { spriteFilename: '../images/svg-sprite.[sha1:hash:hex:10].svg', plainSprite: true } },
+      },
+      {
+        test: /images[\\/](?!svg-sprite).*\.(ico|jpg|jpeg|png|gif|svg)$/,
         use: 'file-loader?name=../images/[name].[sha1:hash:hex:10].[ext]',
       },
       {

@@ -19,3 +19,15 @@
 \* ------------------------------------------------------------ */
 
 @import './_generic*.scss';
+
+body {
+  background: red url(~@images/svg-sprite/twitter.svg);
+}
+
+.articles {
+  background: green url(~@images/svg-sprite/wikipedia.svg);
+}
+
+.article:first-child {
+  background: blue url(~@images/facebook.svg);
+}
